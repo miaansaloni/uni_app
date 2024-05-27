@@ -13,7 +13,8 @@ class FacultyController extends Controller
      */
     public function index()
     {
-        //
+        $faculties = Faculty::with('degrees')->get(); // select * from faculties, JOIN degrees...
+        return $faculties;
     }
 
     /**
@@ -35,9 +36,17 @@ class FacultyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Faculty $faculty)
+    public function show($id)
     {
-        //
+        // displays the details of a faculty along with the degrees and subjects it offers.
+        $faculty = Faculty::with('degrees', 'degrees.subjects')->find($id);
+        if (!$faculty) {
+            return response(['message' => 'Not found'], 404);
+        }
+        return [
+            'success' => true,
+            'data' => $faculty
+        ];
     }
 
     /**

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('faculties', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->string('address')->nullable(); 
+            $table->string('address')->nullable(); // default 255
             $table->string('telephone', 20)->nullable();
             // $table->timestamps();
         });
